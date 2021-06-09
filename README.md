@@ -7,7 +7,8 @@ This website was made for an event organizer customer. Users can browse photos, 
 
 ### Features:
 - Contact form;
-- Customize step-by-step proccess with preview;
+- Customize step-by-step process with preview;
 - Admin panel for CRUD functionality of photos, products, announcements, text and header for every page.
+- Generates and emails invoice on purchase made.
 
 ### [DEMO](https://top-mariage.herokuapp.com/)
