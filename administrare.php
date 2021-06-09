@@ -176,7 +176,7 @@ if ($_SESSION['logat'] == 'Da') {
 		if ((isset($_GET['pr'])) && ($_GET['pr'] == 'inv')) //////////////// INVITATII ///////////////////////////////////////////////////////////
 		{
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse` WHERE `tip`="invitatii"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse` WHERE `tip`="invitatii"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -255,7 +255,7 @@ if ($_SESSION['logat'] == 'Da') {
 		} elseif ((isset($_GET['pr'])) && ($_GET['pr'] == 'mar')) //////////////// MARTURII ///////////////////////////////////////////////////////////
 		{
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse` WHERE `tip`="marturii"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse` WHERE `tip`="marturii"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -334,7 +334,7 @@ if ($_SESSION['logat'] == 'Da') {
 		} elseif ((isset($_GET['pr'])) && ($_GET['pr'] == 'pb')) //////////////// Plicuri Bani ///////////////////////////////////////////////////////////
 		{
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse` WHERE `tip`="plic_bani"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse` WHERE `tip`="plic_bani"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -413,7 +413,7 @@ if ($_SESSION['logat'] == 'Da') {
 		} elseif ((isset($_GET['pr'])) && ($_GET['pr'] == 'cm')) //////////////// Carduri Multumire ///////////////////////////////////////////////////////////
 		{
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse` WHERE `tip`="card_multumire"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse` WHERE `tip`="card_multumire"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -492,7 +492,7 @@ if ($_SESSION['logat'] == 'Da') {
 		} else ///////////////////////////////////////////////////// Toate ///////////////////////////////////////////////////////////
 		{
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse`'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse`'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -727,25 +727,10 @@ if ($_SESSION['logat'] == 'Da') {
 				else $_SESSION['pentru'] = strtolower($_POST['pentru']);
 
 				$uploadpath = $_SESSION['pentru'] . '/';
-				$file = $_SESSION['nume'] . '2.jpg';
+				$file = $_SESSION['nume'] . '.jpg';
 				$uploadpath = $uploadpath . basename($file);
 				if (!move_uploaded_file($_FILES['poza']['tmp_name'], $uploadpath))
 					die('There was an error uploading the file, please try again!');
-				list($width1, $height1) = getimagesize($_SESSION['pentru'] . '/' . $_SESSION['nume'] . '2.jpg');
-				if ($width1 > 1024) {
-					$ratio1 = ($width1 / 1024);
-					$height2 = ($height1 / $ratio1);
-					$image_p2 = imagecreatetruecolor(1024, $height2);
-					$image_name2 = $_SESSION['pentru'] . '/' . $_SESSION['nume'] . '2.jpg';
-					$new_image_name2 = $_SESSION['pentru'] . '/' . $_SESSION['nume'] . '.jpg';
-					$image2 = imagecreatefromjpeg($image_name2);
-					imagecopyresampled($image_p2, $image2, 0, 0, 0, 0, 1024, $height2, $width1, $height1);
-					imagejpeg($image_p2, $new_image_name2, 100);
-
-					unlink($_SESSION['pentru'] . '/' . $_SESSION['nume'] . '2.jpg');
-				} else {
-					rename($_SESSION['pentru'] . '/' . $_SESSION['nume'] . '2.jpg', $_SESSION['pentru'] . '/' . $_SESSION['nume'] . '.jpg');
-				}
 
 				$image_name = $_SESSION['pentru'] . '/' . $_SESSION['nume'] . '.jpg';
 				$nume_nou = $_SESSION['nume'] . '.jpg';
@@ -846,7 +831,7 @@ if ($_SESSION['logat'] == 'Da') {
 
 		if ((!isset($_GET['img'])) || ($_GET['img'] == 'toate')) {
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nume` FROM `imagini`'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `imagini`'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici o imagines in baza de date !</b></font></center>';
@@ -933,7 +918,7 @@ if ($_SESSION['logat'] == 'Da') {
 			else $_SESSION['img'] = strtolower($_GET['img']);
 
 			$rezultate_maxime = 21;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nume` FROM `imagini` WHERE `pentru`="' . $_SESSION['img'] . '"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `imagini` WHERE `pentru`="' . $_SESSION['img'] . '"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici o imagines in baza de date !</b></font></center>';
@@ -1164,7 +1149,7 @@ if ($_SESSION['logat'] == 'Da') {
 						or die('ERROR !');
 					$pagimg = 'page_img/' . $_SESSION['pag'] . '.' . $ext[1];
 
-					$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nrordine` FROM `categorii` WHERE `nume`="' . $_SESSION['pag'] . '"'));
+					$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `categorii` WHERE `nume`="' . $_SESSION['pag'] . '"'));
 					if ($intrari_totale == 1) {
 						$cerereSQL = 'UPDATE `categorii` SET `pagimg`="' . $pagimg . '" WHERE `nume`="' . $_SESSION['pag'] . '"';
 						mysqli_query($conexiune, $cerereSQL) or die("<center><b><font color='red'>Imaginea nu a putut fi setata !</font></b></center>");
@@ -1182,7 +1167,7 @@ if ($_SESSION['logat'] == 'Da') {
 					or die('ERROR !');
 				$pagimg = 'page_img/' . $_SESSION['pag'] . '.' . $ext[1];
 
-				$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nrordine` FROM `categorii` WHERE `nume`="' . $_SESSION['pag'] . '"'));
+				$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `categorii` WHERE `nume`="' . $_SESSION['pag'] . '"'));
 				if ($intrari_totale == 1) {
 					$cerereSQL = 'UPDATE `categorii` SET `pagimg`="' . $pagimg . '" WHERE `nume`="' . $_SESSION['pag'] . '"';
 					mysqli_query($conexiune, $cerereSQL) or die("<center><b><font color='red'>Imaginea nu a putut fi setata !</font></b></center>");
@@ -1354,7 +1339,7 @@ if ($_SESSION['logat'] == 'Da') {
 	} elseif ((isset($_GET['action'])) && ($_GET['action'] == 'listbutonh'))  //////////////////// LISTA BUTOANE HOME ////////////////////////////////////////////
 	{
 		$rezultate_maxime = 20;
-		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `butonh`'));
+		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `butonh`'));
 
 		if ($intrari_totale == 0) {
 			echo '<br><center><font color="darkred"><b>Nu exista inca nici un buton in baza de date !</b></font></center>';
@@ -1668,7 +1653,7 @@ if ($_SESSION['logat'] == 'Da') {
 
 		if ((!isset($_GET['art'])) || ($_GET['art'] == 'toate')) {
 			$rezultate_maxime = 10;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole`'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole`'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un articol in baza de date !</b></font></center>';
@@ -1752,7 +1737,7 @@ if ($_SESSION['logat'] == 'Da') {
 			}
 		} else {
 			$rezultate_maxime = 10;
-			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole` WHERE `pag`="' . $_GET['art'] . '"'));
+			$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole` WHERE `pag`="' . $_GET['art'] . '"'));
 
 			if ($intrari_totale == 0) {
 				echo '<br><center><font color="darkred"><b>Nu exista inca nici un articol in baza de date pentru aceasta pagina !</b></font></center>';
@@ -1842,8 +1827,9 @@ if ($_SESSION['logat'] == 'Da') {
 			$_SESSION['continut'] = $_POST['continut'];
 			$_SESSION['pentru'] = $_POST['pentru'];
 
-			if (($_SESSION['continut'] == '') || ($_SESSION['pentru'] == '')) {
+			if (($_SESSION['titlu'] == '') || ($_SESSION['continut'] == '') || ($_SESSION['pentru'] == '')) {
 				echo '<table width="400" cellspacing="5" cellpading="5" align="center"><tr><td align="center"><font color="red"><b>ERROR !</b></font></td></tr>';
+				if ($_SESSION['titlu'] == '') echo '<tr><td align="center"><font color="red">Introdu te rog titlul articolului !</font></td></tr>';
 				if ($_SESSION['continut'] == '') echo '<tr><td align="center"><font color="red">Introdu te rog continutul articolului !</font></td></tr>';
 				if ($_SESSION['pentru'] == '') echo '<tr><td align="center"><font color="red">Introdu te rog numele paginii pentru care editati articolul !</font></td></tr>';
 				echo '</table>';
@@ -1888,7 +1874,7 @@ if ($_SESSION['logat'] == 'Da') {
 						<tr>
 							<td align="left">
 								<b>Pentru:</b> <br>
-								<select name="pentru">
+								<select name=pentru">
 									<option value="' . $rand['pag'] . '" selected="selected">' . $rand['pag'] . '</option>';
 			$cerereSQL = 'SELECT * FROM `categorii` WHERE `subcat`="nu" ORDER BY `nrordine` ASC';
 			$rezultat = mysqli_query($conexiune, $cerereSQL);
@@ -2001,7 +1987,7 @@ if ($_SESSION['logat'] == 'Da') {
 	} elseif ((isset($_GET['action'])) && ($_GET['action'] == 'listnew'))  //////////////////// LISTA ANUNTURI ///////////////////////////////////////////////////
 	{
 		$rezultate_maxime = 10;
-		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `anunturi`'));
+		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `anunturi`'));
 
 		if ($intrari_totale == 0) {
 			echo '<br><center><font color="darkred"><b>Nu exista inca nici un anunt in baza de date !</b></font></center>';
@@ -2260,7 +2246,7 @@ if ($_SESSION['logat'] == 'Da') {
 				echo '<tr><td align="center"><font color="red">Introdu te rog descrierea paginii !</font></td></tr>';
 				echo '</table>';
 			} else {
-				$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nrordine` FROM `categorii` WHERE `nume`="' . $_GET['nume'] . '" '));
+				$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `categorii` WHERE `nume`="' . $_GET['nume'] . '" '));
 				if ($intrari_totale == 0) {
 					$cerereSQL = 'UPDATE `subcategorii` SET `descriere`="' . $_SESSION['descriere'] . '" WHERE `nume`="' . $_GET['nume'] . '"';
 					mysqli_query($conexiune, $cerereSQL) or die("<center><b><font color='red'>Editarea nu a putut fi realizata !</font></b></center>");
@@ -2279,7 +2265,7 @@ if ($_SESSION['logat'] == 'Da') {
 			echo '';
 		}
 
-		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nrordine` FROM `categorii` WHERE `nume`="' . $_GET['nume'] . '" '));
+		$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `categorii` WHERE `nume`="' . $_GET['nume'] . '" '));
 		if ($intrari_totale == 0) {
 			$tip = 'subcategorii';
 		} else {
@@ -2466,7 +2452,7 @@ if ($_SESSION['logat'] == 'Da') {
 							</tr>
 							<tr>
 								<td colspan="2" class="admin" align="center">
-									<input type="submit" name="login" value="Login" class="button">
+									<input type="submit" name="login" value="Login">
 								</td>
 							</tr>
 					</table>

@@ -5,7 +5,7 @@ $pagimg = '<img src="page_img/home.gif" width="609" height="239" alt="">';
 $cerereSQL = 'SELECT * FROM `categorii` WHERE `nume`="Produse" ';
 $rezultat = mysqli_query($conexiune, $cerereSQL);
 while ($rand = mysqli_fetch_assoc($rezultat)) {
-	$title = $rand['descriere'];
+	$title = $rand['nume'] . ' - ' . $rand['descriere'];
 }
 include('header.php');
 

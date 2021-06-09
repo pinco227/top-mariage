@@ -4,13 +4,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?php echo $title; ?></title>
-
-	<meta name="Keywords" content="nunta, nunti, invitatii, invitatii nunta, decoratiuni nunta">
-	<meta name="author" content="Pi-Design.Ro">
-	<meta name="rating" content="GENERAL">
-	<meta name="description" content="nunta, nunti, invitatii nunta, decoratiuni nunta">
-	<meta name="copyright" content="© 2007 Decoratiuni-Nunta.Com">
-	<meta name="robots" content="index,follow">
 	<style type="text/css">
 		body {
 			background-image: url(images/bg.gif);
@@ -53,7 +46,6 @@
 
 		.linkdiv ul li {
 			position: relative;
-			width: 180px;
 		}
 
 
@@ -113,21 +105,6 @@
 			color: #BB0DC1;
 			font-family: Georgia, "Times New Roman", Times, serif;
 			font-size: 11px;
-			font-weight: bold;
-		}
-
-		.map {
-			color: #FFCC99;
-		}
-
-		.map a {
-			color: #FFCC66;
-			font-weight: bold;
-		}
-
-		.map a:hover,
-		a:active {
-			color: #FF9900;
 			font-weight: bold;
 		}
 
@@ -889,7 +866,7 @@
 									<td width="180" valign="top">
 										<?php
 
-										$categorii = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nrordine` FROM `categorii`'));
+										$categorii = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `categorii`'));
 										if ($categorii == 0) {
 											echo 'In constructie !';
 										} else {
@@ -899,7 +876,7 @@
 											$cerereSQL = 'SELECT * FROM `categorii` ORDER BY `nrordine` ASC';
 											$rezultat = mysqli_query($conexiune, $cerereSQL);
 											while ($rand = mysqli_fetch_assoc($rezultat)) {
-												echo '<li style="height: 38px;"><table width="180" heigh="38" border="0" cellpaddin="0" cellspacing="0"><tr><td width="180" height="38" align="center" valign="center" background="images/buton.gif" style="padding-top:0px;"><a href="' . $rand['url'] . '">' . $rand['nume'] . '</a></td></tr></table>';
+												echo '<li><table width="180" heigh="38" border="0" cellpaddin="0" cellspacing="0"><tr><td width="180" height="38" align="center" valign="center" background="images/buton.gif" style="padding-top:5px;"><a href="' . $rand['url'] . '">' . $rand['nume'] . '</a></td></tr></table>';
 												if ($rand['subcat'] == 'da') {
 													echo '<ul>';
 													$cerereSQL2 = 'SELECT * FROM `subcategorii` WHERE `cat`="' . $rand['nume'] . '" ORDER BY `nrordine` ASC';

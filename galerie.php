@@ -25,7 +25,7 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 $cerereSQL = 'SELECT * FROM `categorii` WHERE `nume`="Galerie Foto" ';
 $rezultat = mysqli_query($conexiune, $cerereSQL);
 while ($rand = mysqli_fetch_assoc($rezultat)) {
-	$title = $rand['descriere'];
+	$title = $rand['nume'] . ' - ' . $rand['descriere'];
 }
 include('header.php');
 
@@ -55,10 +55,10 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 	}
 }
 
-echo '
+echo '<p align="center"><font size="5"><b>Galerie Imagini</b></font></p>
 	<p align="center"><img src="images/a.gif" alt=""></p>';
 
-$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole` WHERE `pag`="Galerie Foto"'));
+$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole` WHERE `pag`="Galerie Foto"'));
 if ($intrari_totale2 == 0) {
 	echo '';
 } else {
@@ -74,7 +74,7 @@ if ($intrari_totale2 == 0) {
 }
 
 $rezultate_maxime = 12;
-$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nume` FROM `imagini` WHERE `pentru`="galerie"'));
+$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `imagini` WHERE `pentru`="galerie"'));
 
 if ($intrari_totale == 0) {
 	echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
@@ -97,7 +97,8 @@ if ($intrari_totale == 0) {
 				$nr++;
 				echo
 				'<td align="center" width="185">
-							<a href="galerie/' . $rand['path'] . '" rel="lightbox[galerie]" title="' . $rand['nume'] . '"><img src="galerie/thumb/' . $rand['path'] . '" width="100" alt=""></a>
+							<a href="galerie/' . $rand['path'] . '" rel="lightbox[galerie]" title="' . $rand['nume'] . '"><img src="galerie/thumb/' . $rand['path'] . '" width="100" alt=""></a><br>
+							<a href="galerie/' . $rand['path'] . '" rel="lightbox[galerie]" title="' . $rand['nume'] . '"><u>' . $rand['nume'] . '</u></a>
 						</td>';
 				if ($nr % 3 == 0) echo '</tr><tr>';
 			}

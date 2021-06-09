@@ -4,7 +4,7 @@ $pagimg = '<img src="page_img/home.gif" width="609" height="239" alt="">';
 $cerereSQL = 'SELECT * FROM `anunturi` WHERE `id`="' . $_GET['id'] . '"';
 $rezultat = mysqli_query($conexiune, $cerereSQL);
 while ($rand = mysqli_fetch_assoc($rezultat)) {
-	$title = $rand['titlu'];
+	$title = 'Top Mariage - ' . $rand['titlu'] . '';
 }
 include('header.php');
 

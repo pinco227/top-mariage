@@ -25,7 +25,7 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 $cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Artificii" ';
 $rezultat = mysqli_query($conexiune, $cerereSQL);
 while ($rand = mysqli_fetch_assoc($rezultat)) {
-	$title = $rand['descriere'];
+	$title = $rand['nume'] . ' - ' . $rand['descriere'];
 }
 include('header.php');
 
@@ -57,7 +57,7 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 
 echo '<p align="center"><img src="images/a.gif" alt=""></p>';
 
-$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole` WHERE `pag`="Artificii"'));
+$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole` WHERE `pag`="Artificii"'));
 if ($intrari_totale2 == 0) {
 	echo '';
 } else {
@@ -72,7 +72,7 @@ if ($intrari_totale2 == 0) {
 	}
 }
 
-$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nume` FROM `imagini` WHERE `pentru`="artificii"'));
+$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `imagini` WHERE `pentru`="artificii"'));
 if ($intrari_totale == 0) {
 	echo '';
 } else {

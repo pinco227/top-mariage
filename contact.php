@@ -25,7 +25,7 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 $cerereSQL = 'SELECT * FROM `categorii` WHERE `nume`="Contact" ';
 $rezultat = mysqli_query($conexiune, $cerereSQL);
 while ($rand = mysqli_fetch_assoc($rezultat)) {
-	$title = $rand['descriere'];
+	$title = $rand['nume'] . ' - ' . $rand['descriere'];
 }
 include('header.php');
 
@@ -57,7 +57,7 @@ while ($rand = mysqli_fetch_assoc($rezultat)) {
 
 echo '<p align="center"><img src="images/a.gif" alt=""></p>';
 
-$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole` WHERE `pag`="Contact"'));
+$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole` WHERE `pag`="Contact"'));
 if ($intrari_totale2 == 0) {
 	echo '';
 } else {
@@ -72,7 +72,7 @@ if ($intrari_totale2 == 0) {
 	}
 }
 
-$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `nume` FROM `imagini` WHERE `pentru`="contact"'));
+$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `imagini` WHERE `pentru`="contact"'));
 if ($intrari_totale == 0) {
 	echo '';
 } else {
@@ -138,7 +138,10 @@ echo
 						</tr>
 						<tr>
 							<td align="left"><b>Mesaj:</b><br>
-								<textarea name="mesaj" style="height: 170px; width: 380px;"></textarea>
+								<textarea id="mesaj" name="mesaj" style="height: 170px; width: 500px;"></textarea>
+								<script language="javascript1.2">
+								  generate_wysiwyg(\'mesaj\');
+								</script>
 							</td>   
 							</td>
 						</tr>

@@ -29,7 +29,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		$cerereSQL4 = "SELECT * FROM `produse` WHERE `id`='" . $_GET['id'] . "' ";
 		$rezultat4 = mysqli_query($conexiune, $cerereSQL4);
 		while ($rand = mysqli_fetch_assoc($rezultat4)) {
-			$title = $rand['nume'] . ' - ' . $rand3['descriere'];
+			$title = $rand3['nume'] . ' - ' . $rand['nume'] . ' - ' . $rand3['descriere'];
 		}
 	}
 	$_SESSION['title'] = $title;
@@ -75,7 +75,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		$cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Invitatii" ';
 		$rezultat = mysqli_query($conexiune, $cerereSQL);
 		while ($rand = mysqli_fetch_assoc($rezultat)) {
-			$title = $rand['descriere'];
+			$title = $rand['nume'] . ' - ' . $rand['descriere'];
 		}
 	}
 	include('header.php');
@@ -672,7 +672,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		$cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Invitatii" ';
 		$rezultat = mysqli_query($conexiune, $cerereSQL);
 		while ($rand = mysqli_fetch_assoc($rezultat)) {
-			$title = $rand['descriere'];
+			$title = $rand['nume'] . ' - ' . $rand['descriere'];
 		}
 	}
 	include('header.php');
@@ -1124,7 +1124,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		$cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Invitatii" ';
 		$rezultat = mysqli_query($conexiune, $cerereSQL);
 		while ($rand = mysqli_fetch_assoc($rezultat)) {
-			$title = $rand['descriere'];
+			$title = $rand['nume'] . ' - ' . $rand['descriere'];
 		}
 	}
 	include('header.php');
@@ -1292,7 +1292,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		$cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Invitatii" ';
 		$rezultat = mysqli_query($conexiune, $cerereSQL);
 		while ($rand = mysqli_fetch_assoc($rezultat)) {
-			$title = $rand['descriere'];
+			$title = $rand['nume'] . ' - ' . $rand['descriere'];
 		}
 	}
 	include('header.php');
@@ -1424,7 +1424,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 		';
 		$headere = "MIME-Version: 1.0\r\n";
 		$headere .= "Content-type: text/html; charset=iso-8859-1\r\n";
-		$headere .= "From: Top Mariage <topmariage@yahoo.com>\r\n";
+		$headere .= "From: <Top Mariage>\r\n";
 
 		mail($catre, $subiect, $mesaj, $headere);
 
@@ -1479,7 +1479,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 
 		$headere2 = "MIME-Version: 1.0\r\n";
 		$headere2 .= "Content-type: text/html; charset=iso-8859-1\r\n";
-		$headere2 .= "From: Top Mariage <topmariage@yahoo.com>\r\n";
+		$headere2 .= "From: <Top Mariage>\r\n";
 
 		mail($catre2, $subiect2, $mesaj2, $headere2);
 	}
@@ -1488,7 +1488,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 	$cerereSQL = 'SELECT * FROM `subcategorii` WHERE `nume`="Invitatii" ';
 	$rezultat = mysqli_query($conexiune, $cerereSQL);
 	while ($rand = mysqli_fetch_assoc($rezultat)) {
-		$title = $rand['descriere'];
+		$title = $rand['nume'] . ' - ' . $rand['descriere'];
 	}
 	include('header.php');
 
@@ -1516,7 +1516,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 	echo '<p align="center"><font size="5"><b>Invitatii de nunta</b></font></p>
 	<p align="center"><img src="images/a.gif" alt=""></p>';
 
-	$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `articole` WHERE `pag`="Invitatii"'));
+	$intrari_totale2 = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `articole` WHERE `pag`="Invitatii"'));
 	if ($intrari_totale2 == 0) {
 		echo '';
 	} else {
@@ -1532,7 +1532,7 @@ if (isset($_GET['page']) && ($_GET['page'] == "prod")) {
 	}
 
 	$rezultate_maxime = 12;
-	$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT `id` FROM `produse` WHERE `tip`="invitatii"'));
+	$intrari_totale = mysqli_num_rows(mysqli_query($conexiune, 'SELECT * FROM `produse` WHERE `tip`="invitatii"'));
 
 	if ($intrari_totale == 0) {
 		echo '<br><center><font color="darkred"><b>Nu exista inca nici un produs in baza de date !</b></font></center>';
